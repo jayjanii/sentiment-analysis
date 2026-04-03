@@ -1,4 +1,4 @@
-# IMDB Sentiment Analysis — Bag-of-Words Classifier in PyTorch
+# IMDB Sentiment Analysis — PyTorch
 
 A binary sentiment classifier trained on the IMDB movie review dataset, built from scratch in PyTorch. Classifies reviews as **positive** or **negative** using a bag-of-words architecture with learned word embeddings.
 
@@ -41,7 +41,7 @@ SentimentModel(
 |---|---|
 | Loss function | `BCELoss` |
 | Optimizer | `Adam` |
-| Learning rate | `1e-3` |
+| Learning rate | `5e-4` |
 | Batch size | `32` |
 | Epochs | `10` |
 | Max sequence length | `256` |
@@ -70,17 +70,7 @@ The model shows classic overfitting after epoch 4-5 — training loss continues 
 
 This is a bag-of-words model, meaning **word order is ignored**. Averaging word embeddings loses sequential context — for example, "not good" and "good" produce similar representations because "good" dominates the mean. This is the primary ceiling on accuracy.
 
-To improve further, the next step would be an LSTM or Transformer-based architecture that models word order and context.
-
----
-
-## Setup
-
-```bash
-pip install datasets transformers torch
-```
-
-Run in Google Colab with GPU runtime for faster training.
+To improve further, the next step would be an Transformer-based architecture that models word order and context.
 
 ---
 
