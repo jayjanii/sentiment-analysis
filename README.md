@@ -1,4 +1,4 @@
-# IMDB Sentiment Analysis — PyTorch
+# IMDB Sentiment Analysis - PyTorch
 
 A binary sentiment classifier trained on the IMDB movie review dataset, built from scratch in PyTorch. Classifies reviews as **positive** or **negative** using a bag-of-words architecture with learned word embeddings.
 
@@ -18,7 +18,7 @@ raw text → tokenization → word IDs → embeddings → mean pool → ReLU →
 SentimentModel(
   embeddings: nn.Embedding(74878, 64)   # learned word vectors
   fc1:        nn.Linear(64, 32)         # hidden layer
-  dropout:    nn.Dropout(p=0.3)         # regularization
+  dropout:    nn.Dropout(p-0.3)         # regularization
   fc2:        nn.Linear(32, 1)          # binary output
   sigmoid:    squash to [0, 1]
 )
@@ -28,7 +28,7 @@ SentimentModel(
 
 - **Vocabulary**: 74,878 tokens built from the training split only (to prevent data leakage). Includes `<pad>` and `<unk>` special tokens.
 - **Encoding**: Reviews are tokenized with `BasicTokenizer`, truncated/padded to 256 tokens.
-- **Mean Pooling**: Word embeddings are averaged across the sequence dimension (`dim=1`) to produce a single fixed-size review vector — the "bag-of-words" step.
+- **Mean Pooling**: Word embeddings are averaged across the sequence dimension (`dim=1`) to produce a single fixed-size review vector = the "bag-of-words" step.
 - **Hidden Layer + ReLU**: Adds non-linearity, allowing the model to learn more complex feature combinations than a single linear layer.
 - **Dropout**: Applied after ReLU to reduce overfitting.
 - **Sigmoid output**: Produces a probability; threshold at 0.5 for binary prediction.
@@ -62,13 +62,13 @@ SentimentModel(
 
 **Best test accuracy: 88.34% (epoch 4)**
 
-The model shows classic overfitting after epoch 4-5 — training loss continues to drop while test loss rises. Early stopping at epoch 4 gives the best generalisation.
+The model shows classic overfitting after epoch 4-5 - training loss continues to drop while test loss rises. Early stopping at epoch 4 gives the best generalisation.
 
 ---
 
 ## Limitations
 
-This is a bag-of-words model, meaning **word order is ignored**. Averaging word embeddings loses sequential context — for example, "not good" and "good" produce similar representations because "good" dominates the mean. This is the primary ceiling on accuracy.
+This is a bag-of-words model, meaning **word order is ignored**. Averaging word embeddings loses sequential context - for example, "not good" and "good" produce similar representations because "good" dominates the mean. This is the primary ceiling on accuracy.
 
 To improve further, the next step would be an Transformer-based architecture that models word order and context.
 
